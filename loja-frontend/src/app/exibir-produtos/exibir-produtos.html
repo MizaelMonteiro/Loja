@@ -1,0 +1,19 @@
+<h1 class="titulo">Produtos</h1>
+
+<div class="produtos">
+  @for (prod of produtos(); track prod.id) {
+    <div class="card-produto">
+      <img [src]="prod.foto" [alt]="prod.nome">
+
+      <p class="nome">{{ prod.nome }}</p>
+
+      <p class="descricao">
+        {{ prod.descricao }}
+      </p>
+
+      <p class="preco">
+        R$ {{ prod.preco }}
+      </p>
+    </div>
+  }
+</div>
