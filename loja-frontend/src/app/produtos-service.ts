@@ -23,4 +23,11 @@ export class ProdutosService {
       `${this.API}/produtos?ordem=ASC&ordenarPor=nome&nome=${nome}`
     );
   }
+
+  obterProdutoPorId(id: number): Observable<Produto>  {
+
+    return this.#http.get<Produto>(
+      `${this.API}/produtos/${id}`
+    );
+  }
 }
