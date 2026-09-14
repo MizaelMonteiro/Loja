@@ -1,0 +1,26 @@
+<h1 class="titulo">Carrinho</h1>
+
+
+<div>
+    
+    <button (click)="addItem(produtos()[0])">Adicionar ao Carrinho</button>
+</div>
+
+<div class="produtos">
+    @for (prod of itens(); track prod.id) {
+        <div class="card-produto">
+            <img [src]="prod.foto" [alt]="prod.nome">
+
+            <p class="nome">{{ prod.nome }}</p>
+
+            <p class="descricao">
+                {{ prod.descricao }}
+            </p>
+
+            <p class="preco">
+                R$ {{ prod.preco }}
+            </p>
+        </div>
+    }
+
+</div>
