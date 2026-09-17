@@ -1,0 +1,41 @@
+.titulo {
+  text-align: center;
+  margin: 30px 0;
+}
+
+.produtos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.card-produto {
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+
+  img {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+  }
+
+  .nome {
+    font-size: 1.1rem;
+    font-weight: bold;
+  }
+
+  .descricao {
+    color: #555;
+  }
+
+  .preco {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+}

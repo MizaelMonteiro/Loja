@@ -1,6 +1,7 @@
 import { Component, inject, input, signal } from '@angular/core';
 import { Produto } from '../produto';
 import { ProdutosService } from '../produtos-service';
+import { CarrinhoService } from '../carrinho-service';
 
 @Component({
   imports: [],
@@ -9,30 +10,19 @@ import { ProdutosService } from '../produtos-service';
   templateUrl: './carrinho.html',
 })
 export class Carrinho {
-  protected itens = 
-    signal<Produto[]>([])
-  id = input<number>();
+  readonly #carrinhoService = inject(CarrinhoService);
+  protected itens = this.#carrinhoService.obterTodos();
 
-  protected produtos = 
-    signal<Produto[]>([])
+  aumentar(id:number){
+    this.#carrinhoService.aumentarQuantidade(id)
+    
 
-  readonly #produtosService = inject(ProdutosService)
-
-  constructor() {
-    this.#produtosService.obterTodos().subscribe(
-      res => {
-        console.log(res);
-        this.produtos.set(res);
-      })
-      console.log(this.id());
   }
+  diminuir(id:number){
+    this.#carrinhoService.diminuirQuantidade(id)
 
-  addItem(produto: Produto) {
-    this.#produtosService.obterProdutoPorId(this.id()!).subscribe(
-      res => {
-        console.log(res);
-        this.itens.update(itens => [...itens, res]);
-      })
-    };
-  
+  }
 }
+
+  
+

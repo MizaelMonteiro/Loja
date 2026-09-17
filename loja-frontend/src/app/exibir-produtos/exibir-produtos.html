@@ -2,18 +2,21 @@
 
 <div class="produtos">
   @for (prod of produtos(); track prod.id) {
-    <div class="card-produto">
-      <img [src]="prod.foto" [alt]="prod.nome">
+  <div class="card-produto">
+    <img [src]="prod.foto" [alt]="prod.nome">
 
-      <p class="nome">{{ prod.nome }}</p>
+    <p class="nome">{{ prod.nome }}</p>
 
-      <p class="descricao">
-        {{ prod.descricao }}
-      </p>
+    <p class="descricao">
+      {{ prod.descricao }}
+    </p>
 
-      <p class="preco">
-        R$ {{ prod.preco }}
-      </p>
-    </div>
+    <p class="preco">
+      R$ {{ prod.preco }}
+    </p>
+    <p>
+      <button (click)="addItem(prod.id)">Adicionar ao Carrinho</button>
+    </p>
+  </div>
   }
 </div>

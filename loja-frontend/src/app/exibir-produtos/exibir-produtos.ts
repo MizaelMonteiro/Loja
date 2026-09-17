@@ -1,8 +1,7 @@
-
 import { Component, inject, signal } from '@angular/core';
 import { ProdutosService } from '../produtos-service';
 import { Produto } from '../produto';
-
+import { CarrinhoService } from '../carrinho-service';
 
 @Component({
   imports: [],
@@ -10,21 +9,25 @@ import { Produto } from '../produto';
   styleUrl: './exibir-produtos.scss',
   templateUrl: './exibir-produtos.html',
 })
-
 export class ExibirProdutos {
-  readonly #produtosService = inject(ProdutosService)
-  protected produtos = 
-    signal<Produto[]>([])
+  readonly #produtosService = inject(ProdutosService);
+  readonly #carrinhoService = inject(CarrinhoService);
+
+  protected produtos = signal<Produto[]>([]);
+  protected itens = signal<Produto[]>([]);
 
   constructor() {
-    this.#produtosService.obterTodos().subscribe(
-      res => {
-        console.log(res);
-        this.produtos.set(res);
-      })
+    this.#produtosService.obterTodos().subscribe((res) => {
+      console.log(res);
+      this.produtos.set(res);
+    });
+  }
+
+  addItem(id:number) {
+    
+    this.#produtosService.obterProdutoPorId(id).subscribe((res) => {
+      this.#carrinhoService.adicionarItem(res)
+      
+    });
   }
 }
-
-
-
-

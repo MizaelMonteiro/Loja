@@ -9,3 +9,8 @@ export interface Produto {
   foto: string;
   quantidade: number;
 }
+
+export interface ItemCarrinho {
+  produto: Produto;
+  quantidade: number;
+}
