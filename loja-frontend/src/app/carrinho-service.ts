@@ -10,62 +10,91 @@ export class CarrinhoService {
   }
   readonly API = 'http://localhost:3000';
   readonly #http = inject(HttpClient);
- private itens = signal<ItemCarrinho[]>([]);
+  private itens = signal<ItemCarrinho[]>([]);
+  private total = signal<number>(0);
 
-adicionarItem(produto: Produto) {
-  for (let i = 0; i < this.itens().length; i++) {
+  adicionarItem(produto: Produto) {
+    for (let i = 0; i < this.itens().length; i++) {
 
-    if (produto.id === this.itens()[i].produto.id) {
+      if (produto.id === this.itens()[i].produto.id) {
 
-      this.itens.update(itens => {
-        itens[i] = {
-          ...itens[i],
-          quantidade: itens[i].quantidade + 1
-        };
+        this.itens.update(itens => {
+          itens[i] = {
+            ...itens[i],
+            quantidade: itens[i].quantidade + 1
+          };
 
-        return [...itens];
-      });
+          return [...itens];
+        });
 
-      return;
+        return;
+      }
     }
+
+    this.itens.update(itens => [
+      ...itens,
+      {
+        produto: produto,
+        quantidade: 1
+      }
+    ]);
   }
 
-  this.itens.update(itens => [
-    ...itens,
-    {
-      produto: produto,
-      quantidade: 1
-    }
-  ]);
-}
-
-aumentarQuantidade(id: number) {
-  this.itens.update(itens =>
-    itens.map(item =>
-      item.produto.id === id
-        ? {
+  aumentarQuantidade(id: number) {
+    this.itens.update(itens =>
+      itens.map(item =>
+        item.produto.id === id
+          ? {
             ...item,
             quantidade: item.quantidade + 1
           }
-        : item
-    )
-  );
-}
+          : item
+      )
+    );
+  }
 
-diminuirQuantidade(id: number) {
-  this.itens.update(itens =>
-    itens.map(item =>
-      item.produto.id === id
-        ? {
+  diminuirQuantidade(id: number) {
+    this.itens.update(itens =>
+      itens.map(item =>
+        item.produto.id === id
+          ? {
             ...item,
             quantidade: Math.max(1, item.quantidade - 1)
           }
-        : item
-    )
-  );
-}
+          : item
+      )
+    );
+  }
 
   obterTodos() {
     return this.itens.asReadonly();
   }
+
+  removerItem(id: number) {
+    this.itens.update(itens => itens.filter(item => item.produto.id !== id));
+  }
+
+  atualizarTotal() {
+    let total = 0;
+    
+    if (this.itens().length === 0) {
+      return 0;
+    }else{
+      for (let i = 0; i < this.itens().length; i++) {
+        total += this.itens()[i].produto.preco * this.itens()[i].quantidade;
+
+      }
+      
+      this.total.set(total);
+    
+      return this.total();
+      
+    }
+    
+  }
+
+  obterTotal() {
+    return this.total();
+  }
+
 }

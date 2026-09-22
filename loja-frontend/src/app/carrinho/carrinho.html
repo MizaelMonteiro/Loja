@@ -18,14 +18,22 @@
     <p class="preco">
       R$ {{ item.produto.preco }}
     </p>
-        <div>
-            <button (click)="diminuir(item.produto.id)">=</button>
-            <p>
-                Quantidade:{{item.quantidade}}
-            </p>
-            <button (click)="aumentar(item.produto.id)">+</button>
-             
-        </div>
+
+    <div>
+        <button (click)="diminuir(item.produto.id)">=</button>
+        <p>
+            Quantidade:{{item.quantidade}}
+        </p>
+        <button (click)="aumentar(item.produto.id)">+</button>
+          
+    </div>
+
+    <div>
+      <button (click)="remover(item.produto.id)">Remover</button>
+    </div>
+    
+  
+
      
 
 
@@ -33,4 +41,10 @@
   </div>
   }
 
+</div>
+
+<div class="total-compra">
+  <h1>Valor total da compra</h1>
+  <p class="total">Total: R$ {{total}}</p>
+  
 </div>

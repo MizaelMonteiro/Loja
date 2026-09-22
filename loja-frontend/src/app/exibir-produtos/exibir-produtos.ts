@@ -29,5 +29,6 @@ export class ExibirProdutos {
       this.#carrinhoService.adicionarItem(res)
       
     });
+    this.#carrinhoService.atualizarTotal();
   }
 }
