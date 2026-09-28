@@ -2,9 +2,10 @@ import { Component, inject, signal } from '@angular/core';
 import { ProdutosService } from '../produtos-service';
 import { Produto } from '../produto';
 import { CarrinhoService } from '../carrinho-service';
+import { RouterLink } from '@angular/router';
 
 @Component({
-  imports: [],
+  imports: [RouterLink],
   selector: 'app-exibir-produtos',
   styleUrl: './exibir-produtos.scss',
   templateUrl: './exibir-produtos.html',
