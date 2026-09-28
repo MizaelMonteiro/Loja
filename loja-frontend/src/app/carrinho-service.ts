@@ -38,6 +38,9 @@ export class CarrinhoService {
         quantidade: 1
       }
     ]);
+
+    this.atualizarTotal();
+    console.log("total no service carrinho", this.obterTotal())
   }
 
   aumentarQuantidade(id: number) {

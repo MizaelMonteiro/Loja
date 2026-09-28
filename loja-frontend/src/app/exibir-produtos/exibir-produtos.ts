@@ -25,10 +25,13 @@ export class ExibirProdutos {
 
   addItem(id:number) {
     
+    
     this.#produtosService.obterProdutoPorId(id).subscribe((res) => {
       this.#carrinhoService.adicionarItem(res)
-      
+      this.#carrinhoService.atualizarTotal()
+      console.log("total no ao clicar no botao comp", this.#carrinhoService.obterTotal())
     });
-    this.#carrinhoService.atualizarTotal();
+    
+    
   }
 }
