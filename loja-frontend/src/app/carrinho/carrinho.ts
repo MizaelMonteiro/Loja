@@ -14,10 +14,10 @@ export class Carrinho {
   protected itens = this.#carrinhoService.obterTodos();
   protected total = this.#carrinhoService.obterTotal();
   
-
   constructor() {
-    console.log("total no constructor carrinho", this.#carrinhoService.obterTotal())
-  }
+  console.log("Itens no carrinho:", this.itens());
+}
+
 
 
   aumentar(id:number){

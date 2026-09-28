@@ -39,3 +39,17 @@
     font-weight: bold;
   }
 }
+.botao-carrinho {
+  text-align: center;
+  margin: 30px;
+}
+
+.botao-carrinho button {
+  width: 80%;
+  padding: 15px;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
